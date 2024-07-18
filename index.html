@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpine.js Bootcamp Widgets</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .widget {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Alpine.js Bootcamp Widgets</h1>
+
+</div>
+<div class="mb-4">
+    <label>Language:</label><br>
+    <input type="radio" id="lang_en" value="en" x-model="lang" checked><label for="lang_en">English</label>
+    <input type="radio" id="lang_fr" value="fr" x-model="lang"><label for="lang_fr">French</label>
+    <input type="radio" id="lang_es" value="es" x-model="lang"><label for="lang_es">Spanish</label>
+</div>
+<div class="mb-4">
+    <label>Shift:</label><br>
+    <input type="radio" id="shift_morning" value="morning" x-model="shift" checked><label for="shift_morning">Morning</label>
+    <input type="radio" id="shift_afternoon" value="afternoon" x-model="shift"><label for="shift_afternoon">Afternoon</label>
+    <input type="radio" id="shift_night" value="nightshift" x-model="shift"><label for="shift_night">Night Shift</label>
+</div>
+<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="getResult()">Get Result</button>
+<p class="mt-4" x-text="result"></p>
+</div>
+<script src="greet.js"></script>
+<script src="transportFee.js"></script>
+
+<div x-data="{ data: '', result: '' }">
+    <input type="text" x-model="data" placeholder="Enter call, sms data">
+    <button @click="calculateBill()">Calculate Bill</button>
+    <p x-text="result"></p>
+</div>
+
+<script src="./totalPhoneBill.js"></script>
+<script>
+    function calculateBill() {
+        let data = document.querySelector('[x-data]').__x.Rdata.data;
+        let result = totalPhoneBill(data);
+        document.querySelector('[x-data]').__x.Rdata.result = result;
+    }
+</script>
+
+<div x-data="{ projectedUsage: '', airtimeAvailable: '', result: '' }">
+    <input type="text" x-model="projectedUsage" placeholder="Projected usage (comma-separated)">
+    <input type="number" x-model="airtimeAvailable" placeholder="Available airtime">
+    <button @click="checkAirtime()">Check Airtime</button>
+    <p x-text="result"></p>
+</div>
+
+<script src="./enoughAirtime.js"></script>
+<script>
+    function checkAirtime() {
+        let projectedUsage = document.querySelector('[x-data]').__x.$data.projectedUsage;
+        let airtimeAvailable = parseFloat(document.querySelector('[x-data]').__x.Rdata.airtimeAvailable);
+        let result = enoughAirtime(projectedUsage, airtimeAvailable);
+        document.querySelector('[x-data]').__x.Rdata.result = result;
+    }
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.x.x/dist/alpine.min.js" defer></script>
+</body>
+
+</html>
